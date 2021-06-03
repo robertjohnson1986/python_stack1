@@ -45,4 +45,3 @@ def length_and_value(size, value):
         new_list.append(value)
     return new_list
 length_and_value(6,2)
-
