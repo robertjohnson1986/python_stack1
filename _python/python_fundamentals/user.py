@@ -28,31 +28,22 @@ class User:        # here's what we have so far
     # adding the deposit method
     def make_deposit(self, amount):    # takes an argument that is the amount of the deposit
         self.account_balance += amount    # the specific user's account increases by the amount of the value received
+        return self
     def make_withdrawl(self, amount): #takes an argument that is the amount of the withdrawl
         self.account_balance -= amount
+        return self
     def display_user_balance(self):
         print("User:",self.name,", Balance: ", self.account_balance)
+        return self
 guido = User("Guido van Rossum", "guido@python.com")
 monty = User("Monty Python", "monty@python.com")
 robert = User("Robert Johnson", "kuyperhouse@gmail.com")
 print(guido.name)    # output: Guido van Rossum
 print(monty.name)    # output: Monty Python
 print(robert.name)
-guido.make_deposit(100)
-guido.make_deposit(200)
-guido.make_deposit(100)
-robert.make_deposit(300)
-robert.make_deposit(6000)
-monty.make_deposit(50)
-guido.make_withdrawl(1)
-robert.make_withdrawl(1)
-robert.make_withdrawl(2.33)
-monty.make_withdrawl(1)
-monty.make_withdrawl(56.22)
-monty.make_withdrawl(28.69)
-monty.display_user_balance()
-guido.display_user_balance()
-robert.display_user_balance()
+guido.make_deposit(100).make_deposit(200).make_deposit(100).make_deposit(300).make_withdrawl(1).display_user_balance()
+monty.make_deposit(50).make_withdrawl(1).make_withdrawl(56.22).make_withdrawl(28.69).display_user_balance()
+robert.make_deposit(6000).make_withdrawl(1).make_withdrawl(2.33).display_user_balance()
 print(guido.account_balance)    # output: 300
 print(monty.account_balance)    # output: 50
 print(robert.account_balance)
