@@ -45,7 +45,7 @@ class User:        # here's what we have so far
         return self
 
     def make_withdrawal(self, amount):
-        self.account.deposit(100)        # we can call the BankAccount instance's methods
+        self.account.withdrawl(100)        # we can call the BankAccount instance's methods
         print(self.account.balance)        # or access its attributes
         return self
     
