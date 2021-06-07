@@ -4,7 +4,7 @@ class BankAccount:
         self.email = email
         self.account_balance = 0
     def make_deposit(self, amount):    # takes an argument that is the amount of the deposit
-        self.account_balance += amount    # the specific user's account increases by the amount of the value received
+        self.account_balance += amount    # the specific user's account increases by the amount of the value received.
         return self
     def make_withdrawl(self, amount): #takes an argument that is the amount of the withdrawl
         self.account_balance -= amount
