@@ -145,3 +145,18 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2015-03-19 16:48:20
+SELECT * 
+FROM users;
+SELECT * 
+FROM faves;
+SELECT *  
+FROM follows;
+SELECT *
+FROM tweets;
+SELECT * 
+FROM users;
+SELECT *
+FROM users
+LEFT JOIN tweets
+ON users.id = tweets.user_id
+WHERE users.id = 1;

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">  
+</head>
+<body>
+    <form action="/result" method="post">
+        {% csrf_token %}
+    <p> What is a question that interests you?<br><textarea id="textboxid" name="name" type="text"></textarea></p>
+    <p> Google it and paste a passage that answers it:<br><textarea id="textboxid" name="name" type="text"></textarea></p>
+    <button type="submit">Submit</button>
+</body>
+</html>
