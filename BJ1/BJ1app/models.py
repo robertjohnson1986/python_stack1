@@ -7,3 +7,7 @@ class User(models.Model):
     age = models.IntegerField(default=25)
     created_at = models.DateTimeField(null=True)
     updated_at = models.DateTimeField(null=True)
+
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
