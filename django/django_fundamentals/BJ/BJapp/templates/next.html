@@ -9,11 +9,21 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">  
 </head>
 <body>
-    <span>{{name}}</span>
-    <form action="/result" method="post">
-        {% csrf_token %}
-    <p>What question do you have about this text? <br><textarea id="textboxid" name="name" type="text"></textarea></p>
-    <p>Google the question and paste some answer here: <br><textarea id="textboxid" name="name" type="text"></textarea></p>
-    <button type="submit">Submit</button>
+    <span>{{title}}</span><br><br>
+    <span>{{obvious}}</span>
+    <span>{{why}}</span>
+    <span>{{important}}</span><br><br>
+    <span>{{info}}</span>
+    <span>{{support1}}</span>
+    <span>{{case1}}</span>
+    <span>{{support2}}</span>
+    <span>{{case2}}</span>
+    <span>{{support3}}</span>
+    <span>{{case3}}</span>
+    <span>{{well}}</span>
+    <span>{{restate}}</span>
+    <span>{{summarize}}</span>
+    <span>{{added}}</span>
+    <span>{{slip}}</span>
 </body>
 </html>

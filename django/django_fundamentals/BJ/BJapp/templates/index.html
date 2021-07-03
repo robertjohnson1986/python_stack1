@@ -11,8 +11,22 @@
 <body>
     <form action="/result" method="post">
         {% csrf_token %}
-    <p> What is a question that interests you?<br><textarea id="textboxid" name="name" type="text"></textarea></p>
-    <p> Google it and paste a passage that answers it:<br><textarea id="textboxid" name="name" type="text"></textarea></p>
+    <p> What is the book/article's title and author?<br><textarea id="title" name="title" type="text"></textarea></p>
+    <p> What is something true and obvious about the book/article?<br><textarea id="obvious" name="obvious" type="text"></textarea></p>
+    <p> Explain why you selected this particular book/article, so your reader knows you have a personal investment in the book. <br><textarea id="why" name="why" type="text"></textarea></p>
+    <p> What is your first thought about the topic? <br><textarea id="important" name="important" type="text"></textarea></p>
+    <p> Write five or fewer sentences about the article/book’s genre, author and/or setting.<br><textarea id="info" name="info" type="text"></textarea></p>
+    <p> What is one of three specific ways your article/book’s text supports your thesis?<br><textarea id="support1" name="support1" type="text"></textarea></p>
+    <p> Add supporting information from the article/book and your interpretation of it to support your case. <br><textarea id="case1" name="case1" type="text"></textarea></p>
+    <p> What is one of three specific ways your article/book’s text supports your thesis?<br><textarea id="support2" name="support2" type="text"></textarea></p>
+    <p> Add supporting information from the article/book and your interpretation of it to support your case. <br><textarea id="case2" name="case2" type="text"></textarea></p>
+    <p> What is one of three specific ways your article/book’s text supports your thesis?<br><textarea id="support3" name="support3" type="text"></textarea></p>
+    <p> Add supporting information from the article/book and your interpretation of it to support your case. <br><textarea id="case3" name="case3" type="text"></textarea></p>
+    <p> Show how well you supported your thesis.<br><textarea id="well" name="well" type="text"></textarea></p>
+    <p> Restate the true and obvious statement above in another way, extending it in a reflective manner.<br><textarea id="restate" name="restate" type="text"></textarea></p>
+    <p> Summarize the highlights of your main argument(s), sticking with just a few short, concise sentences.<br><textarea id="summarize" name="summarize" type="text"></textarea></p>
+    <p> Restate your thesis, but with an added sentence about what makes it important. <br><textarea id="added" name="added" type="text"></textarea></p>
+    <p> Slip some personal details into the conclusion. Draw comparisons between your own life and the book.<br><textarea id="slip" name="slip" type="text"></textarea></p>
     <button type="submit">Submit</button>
 </body>
 </html>
