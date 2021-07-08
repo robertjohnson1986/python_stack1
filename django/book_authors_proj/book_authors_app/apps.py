@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class NinjagoldappConfig(AppConfig):
-    name = 'NinjaGoldApp'
+class Book_authors_appConfig(AppConfig):
+    name = 'book_authors_app'
