@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from .models import Show
 
 # Create your views here.
@@ -13,6 +14,12 @@ def new(request):
 
 def create(request):
     # CREATE THE SHOW
+    errors = Show.objects.validate(request.POST)
+    if errors:
+        for (key, value) in errors.items():
+            messages.error(request, value)
+        return redirect('/shows/new')
+
     Show.objects.create(
         title = request.POST['title'],
         network = request.POST['network'],
@@ -21,6 +28,31 @@ def create(request):
     )
     return redirect('/shows')
 
+def edit(request, show_id):
+    one_show = Show.objects.get(id=show_id)
+    context = {
+            'show': one_show
+    }
+    return render(request, 'edit.html', context)
+
+def update(request, show_id):
+    errors = Show.objects.validate(request.POST)
+    if errors:
+        for (key, value) in errors.items():
+            messages.error(request, value)
+        return redirect('/shows/new')
+    else:
+    # update show!
+        to_update = Show.objects.get(id=show_id)
+        # updates each field
+        to_update.title = request.POST['title']
+        to_update.release_date = request.POST['release_date']
+        to_update.network = request.POST['network']
+        to_update.description = request.POST['description']
+        to_update.save()
+
+    return redirect('/shows/')
+
 def show(request, show_id):
     # query for one show with show_id
     one_show = Show.objects.get(id=show_id)
@@ -28,25 +60,6 @@ def show(request, show_id):
         'show': one_show
     }
     return render(request, 'show.html', context)
-
-def edit(request, show_id):
-    one_show = Show.objects.get(id=show_id)
-    context = {
-        'show': one_show
-    }
-    return render(request, 'edit.html', context)
-
-def update(request, show_id):
-    # update show!
-    to_update = Show.objects.get(id=show_id)
-    # updates each field
-    to_update.title = request.POST['title']
-    to_update.release_date = request.POST['release_date']
-    to_update.network = request.POST['network']
-    to_update.description = request.POST['description']
-    to_update.save()
-
-    return redirect('/shows/')
 
 def delete(request, show_id):
     # NOTE: Delete one show!

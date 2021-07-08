@@ -1,25 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>New Show</title>
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'css/style.css'%}">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>New Show</title>
+</head>
 <body>
-    <h1>Add a New Show</h1>
+    <h1>New Show</h1>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <form action="/shows/create" method="post">
         {% csrf_token %}
-        <label for="title">Title</label><br>
-        <input type="text" name="title" id="title" class="form-control"><br>
-        <label for="network">Network</label><br>
-        <input type="text" name="network" id="network" class="form-control"><br>
-        <label for="release_date">Release Date</label><br>
-        <input type="date" name="release_date" id="release_date" class="form-control"><br>
-        <label for="description">Description</label><br>
-        <textarea name="description" id="description" cols="22" rows="10" class="form-control"></textarea><br>
-        <button class="btn btn-primary">Create</button>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="network">Network</label>
+            <input type="text" name="network" id="network" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="release_date">Release Date</label>
+            <input type="date" name="release_date" id="release_date" class="form-control" value="1978-10-14">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label><br>
+            <textarea name="description" id="description" cols="30" rows="10" class="form-control"></textarea>
+        </div>
+        <button class="btn btn-primary">Submit</button>
     </form>
 </body>
 </html>

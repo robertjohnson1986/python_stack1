@@ -9,6 +9,13 @@
 </head>
 <body>
     <h1>Edit Show</h1>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <form action="/shows/{{ show.id }}/update" method="post">
         {% csrf_token %}
         <div class="form-group">
@@ -25,7 +32,7 @@
         </div>
         <div class="form-group">
             <label for="description">Description</label><br>
-            <textarea name="description" id="description" cols="30" rows="10" class="form-control">{{ show.description}}</textarea>
+            <textarea name="description" id="description" cols="30" rows="10" class="form-control" value="{{ show.description}}"></textarea>
         </div>
         <button class="btn btn-primary">Submit</button>
     </form>
