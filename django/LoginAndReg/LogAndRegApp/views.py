@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import User
+from .models import User, Wall_Message
+import bcrypt
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
@@ -39,6 +40,20 @@ def success(request):
         return redirect('/')
     user = User.objects.get(id=request.session['user_id'])
     context = {
-        'user': user
+        'user': user,
+        'wall_messages' : Wall_Message.objects.all()
     }
     return render(request, 'success.html', context)
+
+def post_mess(request):
+    if request.method == 'POST':
+        if 'user_id' in request.session:
+            user = User.objects.get(id=request.session['user_id']),
+            Wall_Message.objects.create(
+                message=request.POST['mess'],
+                poster = user
+            )
+    return redirect ('/success')
+
+def new_func(request):
+    return request.session['id']

@@ -50,5 +50,9 @@ class User(models.Model):
     last_name = models.CharField(max_length=45)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
-
     objects = UserManager()
+
+class Wall_Message(models.Model):
+    message = models.CharField(max_length=255)
+    poster = models.ForeignKey(User, related_name='user_messages', on_delete=models.CASCADE)
+    user_likes = models.ManyToManyField(User, related_name='liked_posts')
