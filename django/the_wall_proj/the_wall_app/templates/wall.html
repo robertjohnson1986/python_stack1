@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Wall</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <h1>Welcome {{user.first_name}} {{user.last_name}}</h1>
+    <h2>What Is On Your Mind?</h2>
+    <form action='/post_message' method='POST'>
+        {% csrf_token %}
+        <input type='text' name='message'>
+        <button type=submit>Post Message On Wall</button>
+    </form>
+    <a href="/logout">Log Out</a><br>
+
+
+    {% for wall_message in wall_messages %}
+       <h1>{{wall_message.message}}</h1>
+       <p>Posted by {{wall_message.poster.first_name}} {{wall_message.poster.last_name}}</p>
+       <p>Created at: {{wall_message.created_at}}</p>
+       {% if wall_message.poster.id == request.session.user_id %}
+        <form action="/delete_message/{{wall_message.id}}" method = "POST">
+            {% csrf_token %}
+            <button type=submit>Post Message On Wall</button>
+       {% for comment in wall_message.wall_message_comments.all %}
+            <p>{{ comment.comment }}</p>
+            <p>Comment by: {{comment.poster.first_name}} {{comment.poster.last_name}}</p>
+            <p>Created at: {{comment.created_at}}</p>
+       {% endfor %}
+       <form action='/post_comment/{{wall_message.id}}' method='POST'></form>
+            {%csrf_token %}
+            <input type="text" name="comment">
+            <button type="submit">Post Comment On Message</button>
+        </form>
+    {% endfor %}
+
+    
+</body>
+</html>

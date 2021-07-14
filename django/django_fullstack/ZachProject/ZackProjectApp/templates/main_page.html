@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <h1>Welcome <a href="/profile">{{current_user.name}}</a></h1>
+    <a href="/users/logout"><button>Logout</button></a>
+    <h1>Submit a Giraffe</h1>
+    <form action="/giraffes/create" method="POST">
+    {% csrf_token %}
+    <label for="giraffe_name">Giraffe Name: <input type="text" name="giraffe_name"></label>
+    <label for="catchphrase">Catchphrase: <input type="text" name="catchphrase"></label>
+    <button type="sumbit" value="Submit Giraffe">Submit Giraffe</button>
+    </form>
+    <h1>Giraffe's You Own</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Catchphrase</th>
+                <th>Owner</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for one_giraffe in current_user.giraffes_owned.all %}
+            <tr>
+                <td><a href="/giraffes/{{one_giraffe.id}}">{{one_giraffe.name}}</a></td>
+                <td>{{one_giraffe.catchphrase}}</td>
+                <td>{{one_giraffe.owner.name}}</td>
+                <td>
+                    {% if current_user.id == one_giraffe.owner.id %}
+                        <form action="/giraffes/delete/{{one_giraffe.id}}", method="POST">
+                            {% csrf_token %}
+                            <input type="submit" value="Delete {{one_giraffe.name}}">
+                        </form>
+                    {% endif %}
+
+                </td>
+            </tr>
+            {% endfor%}
+        </tbody>
+    </table>
+    <h1>Giraffe's You Don't Own</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Catchphrase</th>
+                <th>Owner</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for one_giraffe in all_giraffes %}
+                {% if one_giraffe.owner != current_user %}
+            <tr>
+                <td><a href="/giraffes/{{one_giraffe.id}}">{{one_giraffe.name}}</a></td>
+                <td>{{one_giraffe.catchphrase}}</td>
+                <td>{{one_giraffe.owner.name}}</td>
+                <td>
+                    
+                </td>
+            </tr>
+                {% endif %}
+            {% endfor%}
+        </tbody>
+    </table>
+</body>
+
+</html>

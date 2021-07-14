@@ -3,29 +3,22 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Success!</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static '/css/login_reg_style.css' %}">
+
 </head>
 
 <body>
-    <div id='wrap'>
-        <a href="/logout">Logout</a>
-        <h1>Welcome to {{user.first_name}}'s Wall!</h1>
+    <div class="wrapper">
+        <h1>Success! Welcome {{user.first_name}}</h1>
+        {% if request.session.user_id %}
+        <p class='green'>Successfully registered (or logged in)</p>
+        {% endif %}
+        <a href="/logout"><button>Logout</button></a>
+    </div>
+</body>
 
-        <div id='write'>
-            <h2>Write a Post:</h2>
-            <form action="/process_message" method="POST">
-                {% csrf_token %}
-                <input type="text" name='mess'>
-                <input type="submit" value="Post">
-            </form>
-        </div>
-
-        <div id='posts'>
-            {% if wall messages %}
-                {% for wall_message in wall_messages %}
-                    <h3>{{wall_message.poster.firstname}}</h3>
-                {% end for %}
-            {% endif %}
+</html>

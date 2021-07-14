@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Wall Login</title>
+</head>
+<body>
+    <div class="contatiner">
+
+        <div class="reg">
+            
+            <form action="/register" method="POST">
+                {% csrf_token %}
+                New to The Wall? Register now!
+
+                First Name:
+                <input type="text" name="fname">
+                
+                First Name:
+                <input type="text" name="lname">
+
+                Email:
+                <input type="email" name="email">
+
+                Password:
+                <input type="password" name="pword">
+                
+                Confirm Password:
+                <input type="password" name="confirm">
+
+                <input type="submit" name="register" value="Register">
+            </form>
+        
+        </div>
+
+        <div class="log">
+
+            <form action="/login" method="POST">
+                {% csrf_token %}
+                Email:
+                <input type="email" name="email">
+
+                Password:
+                <input type="password" name="pword"> 
+
+                <input type="submit" name="login" value="Log In">
+            </form>
+
+        </div>
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+    </div>
+</body>
+</html>
