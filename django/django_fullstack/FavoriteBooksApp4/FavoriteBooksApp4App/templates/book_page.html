@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <div class="wrapper">
+        <h3>Welcome, {{one_book.poster.first_name}}</h3>
+        {% if request.session.user_id %}
+        <p class='green'>Successfully registered (or logged in)</p>
+        {% endif %}
+        <a href="/logout"><button>Logout</button></a>
+    </div>
+    <div id='posts'>
+        <h1>{{one_book.message}}</h1>
+        <h3>Added by: {{one_book.poster.first_name}} {{one_book.poster.last_name}}</h3>
+        <h4>Added on: {{one_book.created_at}}</h4>
+        <h4>Last Updated on: {{one_book.updated_at}}</h4>
+    </div>
+         
+</body>
+</html>

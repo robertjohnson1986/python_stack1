@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a Favorite Book</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <h1>Welcome, {{user.first_name}}</h1>
+        {% if request.session.user_id %}
+        <p class='green'>Successfully registered (or logged in)</p>
+        {% endif %}
+        <a href="/logout"><button>Logout</button></a>
+    </div>
+    
+    <!-- <form action="/post_title" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" name="message">
+            
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" name="description">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+    <div id='posts'>
+        <h2>All Books {{user.first_name}} and Others Have Added</h2>
+        {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+        {% for post in wall_messages %}
+        <div class='one_post'>
+            
+                <a href="/book_page/{{post.id}}">{{post.message}}</a>
+                <p class='poster'>(Added By: {{post.poster.first_name}} {{post.poster.last_name}})</p>
+                <a href="/like_message/{{post.id}}">Like</a>
+                <a href="/unlike_message/{{post.id}}">Remove Like</a>
+                
+            
+        
+        </div>
+        {% endfor %}
+        
+        
+        
+            </div>
+        </div>
+       
+    </div>
+    
+</body>
+
+</html> -->

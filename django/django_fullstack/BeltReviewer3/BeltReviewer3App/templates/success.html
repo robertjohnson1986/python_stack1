@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a Favorite Book</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <h1>Welcome, {{user.first_name}}</h1>
+        {% if request.session.user_id %}
+        <p class='green'>Successfully registered (or logged in)</p>
+        {% endif %}
+        <a href="/logout"><button>Logout</button></a>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <h1>Add a Book Review</h1>
+        <form action="/post_review" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="title"> Book Title</label>
+                <input type="text" class="form-control" name="title">
+            </div>
+            <div>
+                <label for="author">Author</label>
+                <select name="author" id="author">
+                    {% for author in all_authors %}
+                    <option value="{{author.id}}">{{author.name}}</option>
+                    {% endfor%}
+                </select>
+                <div class="form-group">
+                    <label for="add_author">Add Author</label>
+                    <input type="text" class="form-control" name="custom_author">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description">Review</label>
+                <input type="text" class="form-control" name="review">
+            </div>
+            <label for="rating">Rating:</label>
+            <select name="rating" id="rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <h1>Total Book Reviews by {{user.first_name}}</h1>
+        {% for review in my_reviews %}
+            <p>Rating: {{review.rating}}</p>
+            <p>Review: {{review.review}}</p>
+            <p>Title: {{review.book_reviewed.title}}</p>
+        {% endfor %}
+    </div>
+    <!-- <div id='posts'>
+        <h2>All Books {{user.first_name}} and Others Have Added</h2>
+        {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+        {% for post in wall_messages %}
+        <div class='one_post'>
+            
+                <a href="/book_page/{{post.id}}">{{post.message}}</a>
+                <p class='poster'>(Added By: {{post.poster.first_name}} {{post.poster.last_name}})</p>
+                <a href="/like_message/{{post.id}}">Like</a>
+                <a href="/unlike_message/{{post.id}}">Remove Like</a>
+                
+            
+        
+        </div>
+        {% endfor %}
+        
+        
+        
+            </div>
+        </div>
+       
+    </div> -->
+
+</body>
+
+</html>
