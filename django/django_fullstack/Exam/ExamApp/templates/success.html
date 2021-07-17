@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a Favorite Book</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+
+</head>
+{% if messages %}
+<ul class="messages">    
+    {% for message in messages %}    
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+    {% endfor %}
+</ul>
+{% endif %}
+<body>
+    <div class="wrapper">
+        <h1>Hello, {{user.first_name}}</h1>
+        {% if request.session.user_id %}
+        <p class='green'>Successfully registered (or logged in)</p>
+        {% endif %}
+        <a href="/logout"><button>Logout</button></a>
+    </div>
+    
+    <form action="/post_title" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="title">Make a Wish:</label>
+            <input type="text" class="form-control" name="message">
+        
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    {% for one_wish in wall_messages.users_who_grant.id.all %}
+    {one_wish.id}
+    {% endfor %}
+</div>
+    
+    <h1>{{user.first_name}}'s Wishes</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Wish</th>
+                
+                <th>Update Wish</th>
+                <th>Grant Wish</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for one_wish in current_user.user_messages.all %}
+                
+            <tr>
+                <td>{{one_wish.message}}</td>
+                
+               
+                <td>
+                        
+                        
+                        <form action="/update/{{one_wish.id}}" method="post">
+                            {% csrf_token %}
+                            
+                            <input name="message" class="form-control w-50" placeholder="{{one_wish.message}}">
+                            
+                            <button type="submit" class="btn btn-primary">Update</button>
+                            <a href="/delete_message/{{one_wish.id}}" role="button" class="btn btn-danger">Delete</a>
+                            
+                        </form>
+                    
+
+                </td>
+
+                <td>
+                    <a href="/like_message/{{one_wish.id}}" role="button" class="btn btn-danger">Granted</a>
+                    
+                </td>
+            </tr>
+               
+            {% endfor %}
+            
+        </tbody>
+    </table>
+    <h1>Granted Wishes</h1>
+    {% for post in user.granted_books.all %}
+        <div class='one_post'>
+            
+                <p>{{post.message}}</p>
+                
+                
+            
+        
+        </div>
+        {% endfor %}
+</body>
+
+</html>
+

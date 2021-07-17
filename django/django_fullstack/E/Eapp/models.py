@@ -67,30 +67,23 @@ class User(models.Model):
 class MessageManager(models.Manager):
     def message_validator(self, postData):
         errors = {}
-        if len(postData['title']) <1:
-            errors['title_check'] = "Review must be at least 1 character"
-        if len(postData['review']) <5:
-            errors['review_check'] = "Description must be at least 5 characters"
+        if len(postData['message']) <1:
+            errors['title'] = "Title must be at least 1 character"
+        
         return errors
 
-class Author(models.Model):
-    name = models.CharField(max_length=255, default='Robert')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-
 class Books(models.Model):
-    title = models.CharField(max_length=255, default="Title")
-    author = models.ForeignKey(Author, related_name="books", on_delete=models.CASCADE)
+    message = models.CharField(max_length=255)
+    description = models.CharField(max_length=255, default="Text")
+    poster =models.ForeignKey(User, related_name="user_messages", on_delete=models.CASCADE)
+    granted_wish =models.BooleanField(default=False)
+    user_who_grants = models.OneToOneField(User, related_name="wish_granted", on_delete=models.CASCADE, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = MessageManager()
 
-class Reviews(models.Model):
-    book_reviewed = models.ForeignKey(Books, related_name="reviews", on_delete=models.CASCADE, null=True)
-    reviewer =models.ForeignKey(User, related_name="reviews", on_delete=models.CASCADE)
-    review = models.CharField(max_length=255, default="Review")
-    rating = models.IntegerField(default=3)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    objects = MessageManager()
+class Comment(models.Model):
+    comment = models.CharField(max_length=255)
+    poster = models.ForeignKey(User, related_name='user_comments', on_delete=models.CASCADE)
+    wall_message = models.ForeignKey(Books, related_name="post_comments", on_delete=models.CASCADE)
+
