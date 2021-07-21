@@ -16,6 +16,7 @@ urlpatterns = [
     path('delete_message/<int:id>', views.delete_message),
     path('book_page/<int:id>', views.book_page),
     path('update/<int:id>', views.update),
+    path('make_a_wish', views.make)
     # path('grant_wish/<int:id>', views.grant_wish)
 
 ]

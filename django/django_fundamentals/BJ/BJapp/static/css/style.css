@@ -1,11 +1,14 @@
-#textboxid
-{
-    height:200px;
-    font-size:14pt;
-}
+#textboxid2 {
 
+    width: 200px;
+
+}
 span
 {
     font-size:22pt;
     font-weight: bold;
+}
+
+body {
+    padding: 100px;
 }

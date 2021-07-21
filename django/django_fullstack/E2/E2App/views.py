@@ -64,14 +64,15 @@ def post_title(request):
         )
     return redirect('/success')
 
-# def post_description(request):
-#     if request.method == 'POST':
-#         errors = Books.objects.message_validator(request.POST)
-#         if len(errors) > 0:
-#             for key, value in errors.items():
-#                 messages.error(request, value)
-#         else:
-#             Books.objects.create(description=request.POST['description'])
+def post_description(request):
+    if request.method == 'POST':
+        errors = Books.objects.message_validator(request.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value)
+        else:
+            Books.objects.create(description=request.POST['description'])
+    
 
 def like(request, id):
     
@@ -127,7 +128,7 @@ def update(request, id):
         book.message = request.POST['message']
         book.save()
 
-    return redirect('/success')
+    return redirect(f'/update/{id}')
 
 def delete_comment(request, id):
     destroyed = Comment.objects.get(id=id)
@@ -142,5 +143,24 @@ def delete_message(request, id):
 def logout(request):
     request.session.flush()
     return redirect('/')
+def make(request):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    this_user = User.objects.filter(id=request.session['user_id'])
+    context = {
+        'user': this_user[0],
+        'wall_messages' : Books.objects.all(),
+        'current_user': User.objects.get(id=request.session['user_id']),
+        'how_many' : Books.objects.filter(granted_wish=True).count,
+        'how_many2' : Books.objects.filter(user_who_grants=request.session['user_id']).count,
+        'how_many3' : Books.objects.filter(granted_wish=False).count,
+
+        
+        
+        
+        
+    }
+
+    return render(request, 'make_a_wish.html', context)
 
 

@@ -9,21 +9,19 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">  
 </head>
 <body>
-    <span>{{title}}</span><br><br>
-    <span>{{obvious}}</span>
-    <span>{{why}}</span>
-    <span>{{important}}</span><br><br>
-    <span>{{info}}</span>
-    <span>{{support1}}</span>
-    <span>{{case1}}</span>
-    <span>{{support2}}</span>
-    <span>{{case2}}</span>
-    <span>{{support3}}</span>
-    <span>{{case3}}</span>
-    <span>{{well}}</span>
-    <span>{{restate}}</span>
-    <span>{{summarize}}</span>
-    <span>{{added}}</span>
-    <span>{{slip}}</span>
+    <form action="/result" method="post">
+        {% csrf_token %}
+        <p> What is a key question?<br><textarea id="textboxid2" name="house" type="text" style="width: 400px;"></textarea></p>
+        
+         
+        <p> What is some text that begins answering the question?<br><textarea id="textboxid" name="name" type="text" style="width: 400px;"></textarea></p>
+        <button type="submit">Submit</button>
+            </form>
+        <a href="/datapage">Data Page</a>
+    {% for one_data in data reversed %}
+    <h2>{{one_data.house}}</h2>    
+    <h4>{{one_data.name}}</h4><br>
+    {% endfor %}
+    
 </body>
 </html>

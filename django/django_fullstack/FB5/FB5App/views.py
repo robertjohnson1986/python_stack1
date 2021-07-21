@@ -116,7 +116,7 @@ def update(request, id):
     if len(errors):
         for key, value in errors.items():
             messages.error(request, value)
-        return redirect(f'/book_page/{id}')
+        return redirect('/success')
     else:
         book = Books.objects.get(id=id)
         book.message = request.POST['message']

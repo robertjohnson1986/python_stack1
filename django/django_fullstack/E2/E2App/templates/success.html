@@ -26,19 +26,9 @@
         {% endif %}
         <a href="/logout"><button>Logout</button></a>
     </div>
+    <a href="/make_a_wish"><button>Make a Wish</button></a>
+    </div>
     
-    <form action="/post_title" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="title">Make a Wish:</label>
-            <input type="text" class="form-control" name="message">
-        
-        
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-    {% for one_wish in wall_messages.users_who_grant.id.all %}
-    {one_wish.id}
-    {% endfor %}
 </div>
     
     <h1>{{user.first_name}}'s Wishes</h1>
@@ -65,12 +55,7 @@
                 <td>
                         
                         
-                        <form action="/update/{{one_wish.id}}" method="post">
-                            {% csrf_token %}
-                            
-                            <input name="message" class="form-control w-50" placeholder="{{one_wish.message}}">
-                            
-                            <button type="submit" class="btn btn-primary">Update</button>
+                        
                             
                             
                         </form>
